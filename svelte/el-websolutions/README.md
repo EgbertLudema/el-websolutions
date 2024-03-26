@@ -1,3 +1,11 @@
+# EL-Websolutions Documentation
+
+## Overview
+This website is custom build using [Svelte](https://svelte.dev) including routing, [G-SAP](https://gsap.com/), [Typed.js](https://github.com/mattboldt/typed.js) and custom code. I build this website for my just started company(sort of a portfolio of all build websites for clients and a overview of the services I provide).
+
+-----
+
+
 # This repo is no longer maintained. Consider using `npm init vite` and selecting the `svelte` option or — if you want a full-fledged app framework — use [SvelteKit](https://kit.svelte.dev), the official application framework for Svelte.
 
 ---

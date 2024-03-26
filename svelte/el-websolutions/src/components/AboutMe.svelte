@@ -14,9 +14,10 @@
             }
         };
 
+        // Add typed options to ID
         new Typed('#greeting', greetingOptions);
 
-        // Function to initialize the second Typed instance for alternating texts
+        // Function to initialize the second Typed instance for alternating between texts
         function initAlternatingTexts() {
             const alternatingTextsOptions = {
                 strings: [
@@ -31,6 +32,7 @@
                 startDelay: 2000
             };
 
+            // Add typed options to ID
             new Typed('#alternating-texts', alternatingTextsOptions);
             customizeCursor(); 
         }

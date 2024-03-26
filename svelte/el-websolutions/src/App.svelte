@@ -1,7 +1,5 @@
 <script>
     import { Router, Route, Link } from 'svelte-routing';
-    import HomePage from './routes/HomePage.svelte';
-    import ContactPage from './routes/ContactPage.svelte';
     import gsap from 'gsap';
     import ScrollTrigger from 'gsap/ScrollTrigger';
     import { onMount } from 'svelte';

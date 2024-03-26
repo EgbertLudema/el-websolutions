@@ -45,6 +45,7 @@
             formData.append('description', description);
             formData.append('token', token); // Append the reCAPTCHA token to your form data
 
+            // Post the data to the API
             const response = await fetch('https://el-websolutions.com/api/sendmail.php', {
                 method: 'POST',
                 body: formData,
@@ -78,6 +79,7 @@
             <form on:submit={submitForm}>
                 <div class="form-row">
                     <div class="input-data">
+                        <!-- On focus sets the touched status to true. Sets class invalid if the input is marked as touched and is empty -->
                         <input type="text" id="name" bind:value={name} required class:invalid={touched.name && name.trim() === ''} on:focus={() => markTouched('name')}>
                         <div class="underline"></div>
                         <label for="name">Naam</label>
@@ -86,6 +88,7 @@
     
                 <div class="form-row">
                     <div class="input-data">
+                        <!-- On focus sets the touched status to true. Sets class invalid if the input is marked as touched and is not meeting the requirements of a email -->
                         <input type="email" id="email" bind:value={email} required class:invalid={touched.email && !emailValid} on:focus={() => markTouched('email')}>
                         <div class="underline"></div>
                         <label for="email">Mail</label>
@@ -94,6 +97,7 @@
     
                 <div class="form-row">
                     <div class="input-data">
+                        <!-- On focus sets the touched status to true. Sets class invalid if the input is marked as touched and is empty -->
                         <input type="text" id="subject" bind:value={subject} required class:invalid={touched.subject && subject.trim() === ''} on:focus={() => markTouched('subject')}>
                         <div class="underline"></div>
                         <label for="subject">Onderwerp</label>
@@ -102,6 +106,7 @@
     
                 <div class="form-row">
                     <div class="input-data textarea">
+                        <!-- On focus sets the touched status to true. Sets class invalid if the input is marked as touched and is empty -->
                         <textarea id="description" bind:value={description} required class:invalid={touched.description && description.trim() === ''} on:focus={() => markTouched('description')}></textarea>
                         <div class="underline"></div>
                         <label for="description">Schrijf je bericht</label>

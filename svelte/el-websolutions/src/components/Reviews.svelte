@@ -11,7 +11,7 @@
     //         console.error('Failed to fetch reviews');
     //     }
     // });
-    // API CODE: AIzaSyD62g3AeFhctC0HrftHrh2yPHoPbFKTiAg
+   
 </script>
 
 <section id="reviews">
