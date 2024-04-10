@@ -1,5 +1,5 @@
 <script>
-    // Add script if needed
+    import { Link } from 'svelte-routing';
 </script>
 
 <section id="services">
@@ -150,7 +150,7 @@
                 </div>
             </div>
         </div>
-        <h3>Geen idee wat het<br>beste bij jou past?<br>Neem <a href="#contact">contact</a> op!</h3>
+        <h3>Geen idee wat het<br>beste bij jou past?<br>Neem <Link class="link" to="/contact">contact</Link> op!</h3>
     </div>
 </section>
 <style>
@@ -180,7 +180,7 @@
         text-decoration: none;
         font-size: 36px;
     }
-    h3 a{
+    :global(.link){
         position: relative;
         display: inline;
         font-weight: 500; 
@@ -192,7 +192,7 @@
         text-decoration: none;
         font-size: inherit;
     }
-    h3 a::after {
+    :global(.link::after) {
         content: '';
         position: absolute;
         left: 0;

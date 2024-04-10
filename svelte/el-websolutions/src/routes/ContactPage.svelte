@@ -1,6 +1,8 @@
 <script>
     // Import onMount from Svelte for script injection
     import { onMount } from 'svelte';
+    import { currentPath } from '../store.js';
+    import Footer from '../components/Footer.svelte';
 
     let name = '';
     let email = '';
@@ -22,6 +24,7 @@
     $: emailValid = emailPattern.test(email);
 
     onMount(() => {
+        currentPath.set('/contact');
         // Load reCAPTCHA script
         const script = document.createElement('script');
         script.src = 'https://www.google.com/recaptcha/api.js?render=6LcM650pAAAAAPcScGKmOP84USajaX6pPdGWWjZY';
@@ -62,7 +65,7 @@
 </script>
 
 <section id="contact">
-    <div class="container">
+    <div class="container contact-margin">
         <div class="contact-left">
             <h2>Contact</h2>
             <p>Voor al je vragen kun je contact op nemen d.m.v. het formulier.</p>
@@ -118,16 +121,19 @@
         </div>
     </div>
 </section>
+<Footer />
 <style>
 #contact{
     background: var(--primary-gradient);
+}
+.contact-margin{
+    margin: 120px 0px 60px;
 }
 .container{
     display: flex;
     flex-direction: row;
     background: #fff;
     justify-content: space-between;
-    margin-top: 60px;
     position: relative;
 }
 .contact-left, .contact-right{

@@ -1,33 +1,18 @@
 <script>
     import { Router, Route, Link } from 'svelte-routing';
+    import HomePage from './routes/HomePage.svelte';
+    import ContactPage from './routes/ContactPage.svelte';
     import gsap from 'gsap';
     import ScrollTrigger from 'gsap/ScrollTrigger';
     import { onMount } from 'svelte';
-    import { routes } from './routes.js';
+    // import { routes } from './routes.js';
+    import { activeSection, currentPath } from './store.js';
 
-    let activeSection = ''; // Track the active section for styling
+
     let isClickScrolling = false; // Track if scroll is initiated by clicking
+    $: currentSection = $activeSection; // Reactive assignment to keep `currentSection` up-to-date
 
     onMount(() => {
-        // Intersection Observer setup
-        const observerOptions = {
-            rootMargin: "-50% 0px -50% 0px",
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                // Only update the active section if not scrolling due to a click
-                if (entry.isIntersecting && !isClickScrolling) {
-                    activeSection = entry.target.id; // Update active section
-                }
-            });
-        }, observerOptions);
-
-        const sections = document.querySelectorAll("section");
-        sections.forEach((section) => {
-            observer.observe(section);
-        });
-
         // Listen to manual scroll events to reset isClickScrolling flag
         window.addEventListener('scroll', () => {
             // Reset the flag as the user scrolls manually
@@ -43,7 +28,7 @@
     function handleMenuItemClick(event, targetId) {
         event.preventDefault();
         isClickScrolling = true;
-        activeSection = targetId;
+        activeSection.set(targetId);
         
         // Step 1: Disable ScrollTrigger
         gsap.utils.toArray('.project').forEach((project) => {
@@ -70,6 +55,10 @@
             }, 1000);
         }
     }
+
+    activeSection.subscribe(value => {
+        currentSection = value;
+    });
 </script>
 
 <Router>
@@ -80,42 +69,60 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li class="menu-item" class:active={activeSection === 'about-me'}>
-                        <a href="#about-me" on:click={event => handleMenuItemClick(event, 'about-me')}>Over mij</a>
-                    </li>
-                    <li class="menu-item" class:active={activeSection === 'services'}>
-                        <a href="#services" on:click={event => handleMenuItemClick(event, 'services')}>Diensten</a>
-                    </li>
-                    <li class="menu-item" class:active={activeSection === 'projects'}>
-                        <a href="#projects" on:click={event => handleMenuItemClick(event, 'projects')}>Projecten</a>
-                    </li>
-                    <li class="menu-item" class:active={activeSection === 'reviews'}>
-                        <a href="#reviews" on:click={event => handleMenuItemClick(event, 'reviews')}>Reviews</a>
-                    </li>
-                    <li class="primary-btn" class:active={activeSection === 'contact'}>
-                        <Link to="/contact">Contact</Link>
-                        <svg viewBox="-5 -5 110 110" preserveAspectRatio="none" aria-hidden="true">
-                            <defs>
-                                <linearGradient id="buttonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="5%" stop-color="rgba(103,65,153,1)"/>
-                                    <stop offset="50%" stop-color="rgba(17,105,172,1)"/>
-                                    <stop offset="95%" stop-color="rgba(61,188,194,1)"/>
-                                </linearGradient>
-                            </defs>
-                            <path fill="url(#buttonGradient)" d="M0,0 C0,0 100,0 100,0 C100,0 100,100 100,100 C100,100 0,100 0,100 C0,100 0,0 0,0"/>
-                        </svg>
-                    </li>
+                    <!-- Conditionally render different menus based on the currentPath -->
+                    {#if $currentPath === '/'}
+                        <!-- Homepage Menu -->
+                        <li class="menu-item" class:active={$activeSection === 'about-me'}>
+                            <a href="#about-me" on:click={event => handleMenuItemClick(event, 'about-me')}>Over mij</a>
+                        </li>
+                        <li class="menu-item" class:active={$activeSection === 'services'}>
+                            <a href="#services" on:click={event => handleMenuItemClick(event, 'services')}>Diensten</a>
+                        </li>
+                        <li class="menu-item" class:active={$activeSection === 'projects'}>
+                            <a href="#projects" on:click={event => handleMenuItemClick(event, 'projects')}>Projecten</a>
+                        </li>
+                        <li class="menu-item" class:active={$activeSection === 'reviews'}>
+                            <a href="#reviews" on:click={event => handleMenuItemClick(event, 'reviews')}>Reviews</a>
+                        </li>
+                        <li class="primary-btn">
+                            <Link to="/contact">Contact</Link>
+                            <svg viewBox="-5 -5 110 110" preserveAspectRatio="none" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="buttonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="5%" stop-color="rgba(103,65,153,1)"/>
+                                        <stop offset="50%" stop-color="rgba(17,105,172,1)"/>
+                                        <stop offset="95%" stop-color="rgba(61,188,194,1)"/>
+                                    </linearGradient>
+                                </defs>
+                                <path fill="url(#buttonGradient)" d="M0,0 C0,0 100,0 100,0 C100,0 100,100 100,100 C100,100 0,100 0,100 C0,100 0,0 0,0"/>
+                            </svg>
+                        </li>
+                    {:else}
+                    <!-- Contactpage Menu -->
+                        <li class="menu-item">
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li class="primary-btn active">
+                            <Link to="/contact">Contact</Link>
+                            <svg viewBox="-5 -5 110 110" preserveAspectRatio="none" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="buttonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="5%" stop-color="rgba(103,65,153,1)"/>
+                                        <stop offset="50%" stop-color="rgba(17,105,172,1)"/>
+                                        <stop offset="95%" stop-color="rgba(61,188,194,1)"/>
+                                    </linearGradient>
+                                </defs>
+                                <path fill="url(#buttonGradient)" d="M0,0 C0,0 100,0 100,0 C100,0 100,100 100,100 C100,100 0,100 0,100 C0,100 0,0 0,0"/>
+                            </svg>
+                        </li>
+                    {/if}
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- Define routes -->
-    {#each Object.entries(routes) as [path, Component]}
-        <Route path={path} let:params>
-            <Component {params} />
-        </Route>
-    {/each}
+    <Route path="/" component={HomePage} />
+    <Route path="/contact" component={ContactPage} />
 </Router>
 
 <style>

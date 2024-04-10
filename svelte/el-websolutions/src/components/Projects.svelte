@@ -1,7 +1,7 @@
 <script>
-    import { onMount } from 'svelte';
-    import gsap from 'gsap';
-    import ScrollTrigger from 'gsap/ScrollTrigger';
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import { onDestroy } from 'svelte';
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -70,47 +70,34 @@
         }
     ];
 
-    let projectElements = [];
+    function gsapAction(node, params) {
+        const { index } = params;
+        const direction = index % 2 === 0 ? -800 : 800; // Alternate based on index
 
-    onMount(() => {
-        adjustTextHeights();
-        projectElements = document.querySelectorAll('.project');
-        projectElements.forEach((el, i) => {
-            gsap.from(el, {
-                scrollTrigger: {
-                    trigger: el,
-                    start: "0% 60%",
-                    end: "100% 40%",
-                    toggleActions: "play reverse play reverse"
-                },
-                x: i % 2 === 0 ? -800 : 800, 
-                opacity: 0,
-                duration: 1,
-                ease: "power2.out"
-            });
-        });
-    });
-
-    function adjustTextHeights() {
-        projectElements.forEach(element => {
-            const textElement = element.querySelector('.text');
-            if (!textElement) return;
-
-            const projectContentHeight = element.querySelector('.project-content')?.offsetHeight;
-            const h3Height = element.querySelector('h3')?.offsetHeight || 0;
-            const tagsHeight = element.querySelector('.tags')?.offsetHeight || 0;
-            // 40 for the Margins
-            const textHeight = projectContentHeight - (h3Height + tagsHeight + 40);
-            textElement.style.height = `${textHeight}px`;
+        gsap.from(node, {
+            scrollTrigger: {
+                trigger: node,
+                start: "0% 60%",
+                end: "100% 40%",
+                toggleActions: "play reverse play reverse",
+            },
+            x: direction,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
         });
     }
+
+    onDestroy(() => {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    });
 </script>
 
 <section id="projects">
     <h2>Projecten</h2>
     <div class="container">
         {#each projects as project, i (project.id)}
-            <div class="project" id={project.id} bind:this={projectElements[i]}>
+            <div use:gsapAction={{ index: i }} class="project" id={project.id}>
                 <div class="project-image">
                     <img src={project.imageUrl} alt={`Website ${project.name}`}>
                 </div>

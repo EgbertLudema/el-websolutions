@@ -1,45 +1,29 @@
 <script>
     import Typed from 'typed.js';
-    import { onMount } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
+
+    let alternatingTextsTyped;
 
     onMount(() => {
-        // Initialize the first Typed instance for the greeting
-        const greetingOptions = {
-            strings: ['Hoi! Mijn naam is <strong>Egbert Ludema</strong>.'],
+        // Initialize the alternating texts directly without the greeting
+        const alternatingTextsOptions = {
+            strings: [
+                'Ik ben een <strong>webdeveloper</strong>.',
+                'Ik ben een <strong>designer</strong>.'
+            ],
             typeSpeed: 60,
-            showCursor: false,
-            onComplete: (self) => {
-                // Initialize the alternating texts
-                initAlternatingTexts();
-            }
+            backSpeed: 30,
+            loop: true,
+            showCursor: true,
+            cursorChar: '|',
+            startDelay: 0 // You might adjust the startDelay as needed
         };
 
-        // Add typed options to ID
-        new Typed('#greeting', greetingOptions);
-
-        // Function to initialize the second Typed instance for alternating between texts
-        function initAlternatingTexts() {
-            const alternatingTextsOptions = {
-                strings: [
-                    'Ik ben een <strong>webdeveloper</strong>.',
-                    'Ik ben een <strong>designer</strong>.'
-                ],
-                typeSpeed: 60,
-                backSpeed: 30,
-                loop: true,
-                showCursor: true,
-                cursorChar: '|',
-                startDelay: 2000
-            };
-
-            // Add typed options to ID
-            new Typed('#alternating-texts', alternatingTextsOptions);
-            customizeCursor(); 
-        }
+        alternatingTextsTyped = new Typed('#alternating-texts', alternatingTextsOptions);
+        customizeCursor();
 
         // Function to customize the cursor's appearance
         function customizeCursor() {
-            // Apply cursor customization shortly after initializing Typed.js to ensure the cursor element is present
             setTimeout(() => {
                 const cursorElement = document.querySelector('.typed-cursor');
                 if (cursorElement) {
@@ -51,6 +35,12 @@
                     `;
                 }
             }, 10);
+        }
+    });
+
+    onDestroy(() => {
+        if (alternatingTextsTyped) {
+            alternatingTextsTyped.destroy();
         }
     });
 </script>
@@ -65,7 +55,7 @@
                 <img class="about-me-img-head" src="/images/Portret_Egbert_NoBG.png" alt="Portret Egbert">            
             </div>
             <div class="about-me-right">
-                <span id="greeting"></span>
+                <span id="greeting">Hoi! Mijn naam is <strong>Egbert Ludema</strong>.</span>
                 <br>
                 <span id="alternating-texts"></span>
             </div>
