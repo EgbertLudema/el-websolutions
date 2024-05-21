@@ -1,10 +1,17 @@
 <script>
     import { Link } from 'svelte-routing';
+
+    let showOverlay_1page = false;
+
+    function toggleOverlay_1page() {
+        showOverlay_1page = !showOverlay_1page;
+    }
 </script>
 
 <section id="services">
     <div class="container">
-        <h2>Design. Websites. Webshops. <br>Ik doe het allemaal</h2>
+        <h2>Diensten</h2>
+        <!-- <h2>Design. Websites. Webshops. <br>Ik doe het allemaal</h2> -->
         <div class="services">
             <div class="service">
                 <div class="header-service">
@@ -37,8 +44,9 @@
                     </ul>
                 </div>
                 <div class="footer-service">
-                    <button class="secondair-btn"><span>Meer info...</span></button>
+                    <button class="secondair-btn" on:click={toggleOverlay_1page}><span>Meer info...</span></button>
                 </div>
+                
             </div>
             <div class="service">
                 <div class="header-service">
@@ -152,14 +160,69 @@
         </div>
         <h3>Geen idee wat het<br>beste bij jou past?<br>Neem <Link class="link" to="/contact">contact</Link> op!</h3>
     </div>
+    {#if showOverlay_1page}
+    <div class="overlay">
+        <div class="container overlay-container">
+            <div class="overlay-row">
+                <button class="overlay-close-btn" on:click|stopPropagation={toggleOverlay_1page}></button>
+                <div class="overlay-content">
+                    <h2>Wat houdt een 1 page in?</h2>
+                    <div class="row">
+                        <div class="row-80">
+                            <p>
+                                Een 1 page website houdt in dat alle content op 1 pagina staat. Neem als voorbeeld deze website van EL-Websolutions. 
+                                Er is wel een menu, maar zodra je hierop klikt scrolt de website naar dit element toe! 
+                                Het is dus ideal voor bedrijven die puur de mogelijkheid aan hun klanten willen geven om in het kort te laten zien wat het bedrijf doet met contact mogelijkheden.
+                            </p>
+                            <p>
+                                Verder ontkomt je bij een website niet aan meerdere pagina's. Er komen altijd extra pagina's bij zoals; posts, algemene voorwaarden, etc., 
+                                maar bij een 1page website blijft het de bedoeling dat alles te bereiken valt vanaf de homepage.
+                            </p>
+                        </div>
+                        <div class="row-20 align-center">
+                            <svg class="wp-logo" xmlns="http://www.w3.org/2000/svg" id="W_Mark" data-name="W Mark" viewBox="0 0 666.67 666.67">
+                                <title>Wordpress Logo</title>
+                                <g id="W_Mark-2" data-name="W Mark">
+                                    <path class="cls-1" d="M333.33,20c42.31,0,83.34,8.28,121.96,24.62,18.56,7.85,36.47,17.57,53.22,28.89,16.6,11.21,32.2,24.09,46.39,38.27,14.18,14.18,27.06,29.79,38.27,46.39,11.32,16.75,21.03,34.65,28.89,53.22,16.33,38.62,24.62,79.65,24.62,121.96s-8.28,83.34-24.62,121.96c-7.85,18.56-17.57,36.47-28.89,53.22-11.21,16.6-24.09,32.2-38.27,46.39-14.18,14.18-29.79,27.06-46.39,38.27-16.75,11.32-34.65,21.03-53.22,28.89-38.62,16.33-79.65,24.62-121.96,24.62s-83.34-8.28-121.96-24.62c-18.56-7.85-36.47-17.57-53.22-28.89-16.6-11.21-32.2-24.09-46.39-38.27-14.18-14.18-27.06-29.79-38.27-46.39-11.32-16.75-21.03-34.65-28.89-53.22-16.33-38.62-24.62-79.65-24.62-121.96s8.28-83.34,24.62-121.96c7.85-18.56,17.57-36.47,28.89-53.22,11.21-16.6,24.09-32.2,38.27-46.39,14.18-14.18,29.79-27.06,46.39-38.27,16.75-11.32,34.65-21.03,53.22-28.89,38.62-16.33,79.65-24.62,121.96-24.62M333.33,0C149.24,0,0,149.24,0,333.33s149.24,333.33,333.33,333.33,333.33-149.24,333.33-333.33S517.43,0,333.33,0h0Z"/>
+                                    <path class="cls-1" d="M55.56,333.32c0,109.95,63.89,204.97,156.56,249.99L79.61,220.28c-15.41,34.54-24.05,72.77-24.05,113.04ZM520.86,319.31c0-34.34-12.33-58.11-22.9-76.61-14.08-22.89-27.29-42.26-27.29-65.15,0-25.53,19.36-49.3,46.65-49.3,1.23,0,2.4.15,3.6.22-49.42-45.28-115.27-72.93-187.58-72.93-97.05,0-182.42,49.8-232.09,125.2,6.52.21,12.67.34,17.88.34,29.05,0,74.03-3.53,74.03-3.53,14.97-.88,16.74,21.12,1.78,22.89,0,0-15.05,1.76-31.79,2.64l101.15,300.88,60.8-182.31-43.27-118.57c-14.97-.88-29.13-2.64-29.13-2.64-14.97-.88-13.22-23.77,1.76-22.89,0,0,45.86,3.53,73.16,3.53,29.05,0,74.04-3.53,74.04-3.53,14.97-.88,16.74,21.12,1.77,22.89,0,0-15.07,1.76-31.79,2.64l100.39,298.59,28.66-90.8c12.73-39.68,20.19-67.8,20.19-91.57ZM338.21,357.62l-83.36,242.17c24.89,7.32,51.21,11.32,78.48,11.32,32.35,0,63.38-5.58,92.25-15.75-.74-1.19-1.43-2.45-1.99-3.83l-85.38-233.91ZM577.09,200.07c1.19,8.85,1.87,18.34,1.87,28.56,0,28.18-5.28,59.86-21.13,99.49l-84.84,245.3c82.58-48.15,138.12-137.61,138.12-240.09,0-48.29-12.34-93.7-34.02-133.26Z"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <h4>Wat kun je verwachten:</h4>
+                    <ul>
+                        <li>Een header(foto, video, tekst)</li>
+                        <li><strong>Gemakkelijk</strong> zelf aanpasbaar</li>
+                        <li>Alles op 1 pagina</li>
+                        <li>Gebruiksvriendelijke & overzichtelijke pagina</li>
+                        <li>Je eigen huisstijl wordt toegepast op de website(Logo's, kleuren, font)</li>
+                        <li>Contact sectie</li>
+                        <li>Responsive <div class="tooltip tooltip-right">?<span class="tooltiptext">Geoptimaliseerd voor mobiel, tablet, laptop en desktop!</span></div></li>
+                        <li><strong>SEO</strong> optimalisatie <div class="tooltip tooltip-right">?<span class="tooltiptext">(Search Engine Optimalisation) beter vindbaar op google</span></div></li>
+                        <li><strong>Gratis</strong> tutorial voor het aanpassen van content</li>
+                    </ul>
+                    <p>Overige opties:</p>
+                    <ul>
+                        <li>Van de header een carousel maken(laat om de 3seconden een andere foto zien)</li>
+                        <li>Een lijst van posts(bijv. "het laatste nieuws")</li>
+                        <li>De mogelijkheid voor een contact formulier</li>
+                        <li>Een google maps pin locatie van jou bedrijf op de website.</li>
+                    </ul>
+                    <p>Verder ben ik erg flexibel en kun je bij mij met al je vragen terecht. Bij coderen is alles mogelijk, wel ga ik kijken of het ook efficiënter kan of wel nodig is.</p>
+                    <h3>Vragen? Neem direct <Link class="link" to="/contact">contact</Link> op!</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/if}
 </section>
 <style>
-    .container{
+    .container {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    h2{
+    h2 {
         font-weight: 600;
         background: var(--primary-gradient);
         -webkit-background-clip: text;
@@ -170,7 +233,7 @@
         font-size: 40px;
         text-align: center;
     }
-    h3{
+    h3 {
         font-weight: 400;
         background: var(--primary-gradient);
         -webkit-background-clip: text;
@@ -180,70 +243,137 @@
         text-decoration: none;
         font-size: 36px;
     }
-    :global(.link){
-        position: relative;
-        display: inline;
-        font-weight: 500; 
-        background: var(--primary-gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        color: transparent;
-        text-decoration: none;
-        font-size: inherit;
-    }
-    :global(.link::after) {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -2px;
-        height: 3px; 
-        background: var(--primary-gradient);
-        border-radius: 5px;
-    }
-    .services{
+    .services {
         display: grid;
         width: 100%;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
     }
-    .service{
+    .service {
         background: var(--primary-gradient);
         border-radius: var(--primary-border-radius);
-        box-shadow: #000 4px 4px 20px -10px;
+        box-shadow: rgba(0, 0, 0, 0.2) 4px 4px 20px -10px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        transform-style: preserve-3d; /* Allow 3D transformations */
+        perspective: 1000px; /* Depth of 3D effect */
     }
-    .header-service{
+    .service:hover {
+        cursor: pointer;
+        /* transform: translateY(-10px); */
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 15px 35px -5px;
+    }
+    .header-service {
         height: 130px;
         background: #fff;
-        margin: 4px 4px 0px 4px;
-        padding: 10px 0px;
+        margin: 4px 4px 0 4px;
+        padding: 10px 0;
         border-radius: calc(var(--primary-border-radius) - 4px) calc(var(--primary-border-radius) - 4px) 0 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
     }
-    .header-service h3{
+    .header-service h3 {
         font-weight: 600;
         color: var(--primary-blue);
         font-size: 24px;
         margin: 5px;
     }
-    .content-service{
+    .content-service {
         padding: 10px;
         color: #fff;
     }
-    .content-service ul{
+    .content-service ul {
         padding-left: 25px;
     }
-    .content-service ul li{
+    .content-service ul li {
         font-weight: 300;
         font-size: 14px;
     }
-    .footer-service{
+    .footer-service {
         display: flex;
         flex-direction: row;
         justify-content: center;
+    }
+    /* Overlay */
+    .overlay {
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--primary-gradient-opacity);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .overlay-row {
+        width: calc(100% - 40px);
+        height: 100%;
+        background: white;
+        padding: 20px;
+        border-radius: var(--primary-border-radius);
+        position: relative;
+    }
+    .overlay-content {
+        overflow: auto;
+        max-height: 80vh;
+        margin-top: 30px;
+    }
+    .overlay .tooltip{
+        background: #000;
+        color: #fff;
+        top: -1px;
+    }
+    .overlay h2{
+        width: fit-content;
+        margin: 0px;
+    }
+    .overlay .wp-logo{
+        max-width: 150px;
+    }
+    .overlay-close-btn {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0px;
+        &:before {
+            content: "";
+            position: absolute;
+            height: 4px;
+            width: 30px;
+            background-color: var(--primary-blue);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            transition: ease-out .3s all;
+            border-radius: 4px;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            height: 4px;
+            width: 30px;
+            background-color: var(--primary-blue);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            transition: ease-out .3s all;
+            border-radius: 4px;
+        }
+        &:hover, &:focus {
+            &:before {
+                transform: translate(-50%, -50%) rotate(135deg);
+            }
+            &:after {
+                transform: translate(-50%, -50%) rotate(225deg);
+            }
+        }
     }
 </style>

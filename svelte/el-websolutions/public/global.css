@@ -3,6 +3,7 @@
 	--primary-blue: #1169ac;
 	--primary-cyan: #3dbcc2;
 	--primary-gradient: linear-gradient(90deg, rgba(103,65,153,1) 5%, rgba(17,105,172,1) 50%, rgba(61,188,194,1)95%);
+    --primary-gradient-opacity: linear-gradient(90deg, rgba(103,65,153,0.6) 5%, rgba(17,105,172,0.6) 50%, rgba(61,188,194,0.6)95%);
     /* Contact button */
     --motion-ease: cubic-bezier(0.68, -0.6, 0.32, 1.6);
     --motion-duration: 0.3s;
@@ -40,6 +41,10 @@ img{
 }
 .no-margin{
     margin: 0;
+}
+.link{
+    font-weight: 500;
+    text-decoration-line: none;
 }
 /* Custom scroll */
 ::-webkit-scrollbar-track
@@ -130,6 +135,21 @@ img{
     font-weight: 900;
     font-style: italic;
 }
+/* Menu a tags */
+#menu .menu ul li.menu-item a, #menu .menu ul li.menu-item .menu-a {
+    padding: 10px 0px;
+    transition: all 0.6s ease;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    background: var(--primary-gradient);
+    /* Clip the background to the text */
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Make the text color transparent to show the background */
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    text-decoration: none;
+}
 .primary-btn {
     appearance: none;
     background: transparent;
@@ -176,7 +196,6 @@ img{
 .primary-btn:hover > svg > path, .primary-btn.active > svg > path {
     d: path("M0,0 C0,-5 100,-5 100,0 C105,0 105,100 100,100 C100,105 0,105 0,100 C-5,100 -5,0 0,0");
 }
-
 .primary-btn:active > svg > path {
     d: path("M0,0 C30,10 70,10 100,0 C95,30 95,70 100,100 C70,90 30,90 0,100 C5,70 5,30 0,0");
 }
@@ -208,6 +227,7 @@ img{
     font-size: 10px;
     border-radius: 50%;
     color: var(--primary-blue);
+    cursor: pointer;
 }
 .tooltip.tooltip-right .tooltiptext {
     visibility: hidden;
@@ -249,6 +269,20 @@ section{
 .container {
 	max-width: 1260px;
 	width: 100%;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+}
+.row-20{
+    width: 20%;
+}
+.row-80{
+    width: 80%;
+}
+.align-center{
+    display: flex;
+    justify-content: center;
 }
 .arrow{
     width: 35px;

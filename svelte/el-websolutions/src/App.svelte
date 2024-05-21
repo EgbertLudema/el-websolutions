@@ -81,9 +81,9 @@
                         <li class="menu-item" class:active={$activeSection === 'projects'}>
                             <a href="#projects" on:click={event => handleMenuItemClick(event, 'projects')}>Projecten</a>
                         </li>
-                        <li class="menu-item" class:active={$activeSection === 'reviews'}>
+                        <!-- <li class="menu-item" class:active={$activeSection === 'reviews'}>
                             <a href="#reviews" on:click={event => handleMenuItemClick(event, 'reviews')}>Reviews</a>
-                        </li>
+                        </li> -->
                         <li class="primary-btn">
                             <Link to="/contact">Contact</Link>
                             <svg viewBox="-5 -5 110 110" preserveAspectRatio="none" aria-hidden="true">
@@ -100,7 +100,7 @@
                     {:else}
                     <!-- Contactpage Menu -->
                         <li class="menu-item">
-                            <Link to="/">Home</Link>
+                            <Link class="menu-a" to="/">Home</Link>
                         </li>
                         <li class="primary-btn active">
                             <Link to="/contact">Contact</Link>
@@ -181,20 +181,7 @@
     #menu .menu ul li.menu-item:hover:before, #menu .menu ul li.active:before {
         width: 100%;
     }
-    #menu .menu ul li.menu-item a {
-        padding: 10px 0px;
-        transition: all 0.6s ease;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 600;
-        background: var(--primary-gradient);
-        /* Clip the background to the text */
-        -webkit-background-clip: text;
-        background-clip: text;
-        /* Make the text color transparent to show the background */
-        -webkit-text-fill-color: transparent;
-        color: transparent;
-        text-decoration: none;
-    }
+    /* styling for a tags inside global.css */
     #menu .menu ul li.primary-btn{
         margin-left: 10px;
     }

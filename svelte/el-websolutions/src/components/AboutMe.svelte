@@ -36,7 +36,26 @@
                 }
             }, 10);
         }
+
+        // Adjust the width of the .about-me-img-head
+        adjustImageWidth();
     });
+
+    function adjustImageWidth() {
+        const imgInsideCircle = document.querySelector('.white-circle .about-me-img');
+        const headImage = document.querySelector('.about-me-img-head');
+        
+        if (imgInsideCircle && headImage) {
+            const observer = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    if (entry.target === imgInsideCircle) {
+                        headImage.style.width = `${entry.contentRect.width}px`;
+                    }
+                }
+            });
+            observer.observe(imgInsideCircle);
+        }
+    }
 
     onDestroy(() => {
         if (alternatingTextsTyped) {
@@ -98,8 +117,11 @@
         align-items: center;
         flex-direction: row-reverse;
     }
-    .about-me-left, .about-me-right{
-        width: 50%;
+    .about-me-left{
+        width: 40%;
+    }
+    .about-me-right{
+        width: 60%;
     }
     .about-me-left {
         display: flex;
@@ -109,7 +131,10 @@
     }
     .white-circle{
         background-color: #fff;
-        width: 60%;
+        max-width: 80%;
+        max-height: 80%;
+        width: 100%;
+        height: 100%;
         aspect-ratio: 1;
         animation: border-radius-animation 10s infinite ease-in-out;
         position: relative;
@@ -118,14 +143,14 @@
     }
     .about-me-img {
         position: absolute;
-        width: 378px;
+        width: 100%;
         top: -65px;
         background-color: #fff;
     }
     .about-me-img-head {
         position: absolute;
-        width: 378px;
-        top: -59px;/* equal the same as other img minus border of .white-circle */
+        /* Sets same width of image inside white-cirlce using JS */
+        top: -59px; /* Set the same top as other image = 65px - 6px(border) = same position */
         clip-path: inset(0% 0% 40% 0%);
     }
     #about-me span{

@@ -135,6 +135,7 @@
         -webkit-animation: BG-gradient-animation 11s ease-in-out infinite;
         -moz-animation: BG-gradient-animation 11s ease-in-out infinite;
         animation: BG-gradient-animation 11s ease-in-out infinite;
+        padding-bottom: 180px;
     }
     h2{
         color: #fff;
